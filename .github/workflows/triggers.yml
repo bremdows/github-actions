@@ -1,0 +1,45 @@
+name : Triggers Configurando los binarios
+on :
+    push :
+        branches: 
+            ['main', 'aprendiendo-github-actions']
+    pull_request :
+        types :
+            [opened, labeled]
+        branches :
+            ['main', 'remote/**'] # Cuando se ejecute en la rama main y todas las que se encuentren dentro de remote
+    workflow_dispatch :
+        inputs :
+            lenguaje_favorito :
+                description: 'Lenguaje Favorito'
+                default: Python
+                required: true
+                type: choice
+                options:
+                - Python
+                - JavaScript
+                - Go
+            nombre:
+                description: 'Tu nombre'
+                required: true
+                default: Juan
+                type: string
+    schedule :
+        - cron: '47 6,18 * * 1'
+jobs :
+    trigger-entorno :
+        runs-on : ubuntu-latest
+    other-trigger : 
+        if : ${{github.event_name != 'workflow_dispatch'}} # Validación que limita la ejecución de este job para cuando el workflow se ejecute de forma manual (workflow_dispatch)
+        runs-on : ubuntu-latest
+        steps:
+            - name : Checkout
+              uses : actions/checkout@v3
+            - name : Configurando Node
+              uses : actions/setup-node@v3
+              with :
+                node-version: '18'
+            - name : Ejecutando el código
+              run : node hola.js
+        
+                                     
