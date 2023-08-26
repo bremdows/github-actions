@@ -28,8 +28,6 @@ on :
     schedule :
         - cron: '47 6,18 * * 1'
 jobs :
-    trigger-entorno :
-        runs-on : ubuntu-latest
     other-trigger : 
         # if : ${{github.event_name != 'workflow_dispatch'}} # Validación que limita la ejecución de este job para cuando el workflow se ejecute de forma manual (workflow_dispatch)
         runs-on : ubuntu-latest
