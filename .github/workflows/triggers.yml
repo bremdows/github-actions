@@ -28,14 +28,23 @@ on :
     schedule :
         - cron: '47 6,18 * * 1'
 jobs :
-    other-trigger : 
-         #if : ${{github.event_name != 'workflow_dispatch'}} # Validación que limita la ejecución de este job para cuando el workflow se ejecute de forma manual (workflow_dispatch)
-        # if : ${{ github.event.inputs.lenguaje_favorito == "Python" }}
-        runs-on : ubuntu-latest
+    like-that : 
+        if : ${{inputs.nombre == Bremdow}}
+        runs-on: ubuntu-latest
         steps:
             - name : Checkout
               uses : actions/checkout@v3
-            - name : Mostrar Seleccion
-              run : echo ${{github.event.inputs.lenguaje_favorito }}   
-        
-                                     
+            - name : Salida
+              run : echo "Te gusta programar en ${{inputs.lenguaje_favorito}}"
+
+    other-trigger : 
+            #if : ${{github.event_name != 'workflow_dispatch'}} # Validación que limita la ejecución de este job para cuando el workflow se ejecute de forma manual (workflow_dispatch)
+        runs-on : ubuntu-latest
+        steps:
+            - name : configuracio entorno
+              uses : actions/checkout@v3
+            - name : Show 
+              run : echo Tu lenguaje favorito es ${{github.event.inputs.lenguaje_favorito }}
+            
+            
+            
