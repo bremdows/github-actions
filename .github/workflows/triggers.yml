@@ -29,14 +29,19 @@ on :
         - cron: '47 6,18 * * 1'
 jobs :
     like-that : 
-        if : ${{inputs.nombre == Bremdow}}
         runs-on: ubuntu-latest
         steps:
             - name : Checkout
               uses : actions/checkout@v3
             - name : Salida
+              if : inputs.nombre == 'Bremdow'
               run : echo "Te gusta programar en ${{inputs.lenguaje_favorito}}"
-
+    other-condition: 
+        runs-on : ubuntu-latest
+        steps : 
+            - name : Validacion de datos
+              if :  inputs.nombre == 'Hugo'
+              run : echo "Te gusta programar en otro lenguaje de programación"
     other-trigger : 
             #if : ${{github.event_name != 'workflow_dispatch'}} # Validación que limita la ejecución de este job para cuando el workflow se ejecute de forma manual (workflow_dispatch)
         runs-on : ubuntu-latest
