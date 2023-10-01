@@ -32,7 +32,7 @@ jobs :
         runs-on: ubuntu-latest
         steps:
             - name : Checkout
-              uses : actions/checkout@v3
+              uses : actions/checkout@v4
             - name : Salida
               if : inputs.nombre == 'Bremdow'
               run : echo "Te gusta programar en ${{inputs.lenguaje_favorito}}"
@@ -47,7 +47,7 @@ jobs :
         runs-on : ubuntu-latest
         steps:
             - name : configuracio entorno
-              uses : actions/checkout@v3
+              uses : actions/checkout@v4
             - name : Show 
               run : echo Tu lenguaje favorito es ${{github.event.inputs.lenguaje_favorito }}
             
